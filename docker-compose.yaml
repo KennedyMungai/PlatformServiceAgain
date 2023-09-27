@@ -6,12 +6,14 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Password1!
+      MYSQL_DATABASE: platformsdb
     ports:
       - 3310:3306
   command-db:
     image: mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=Password1!
+      MYSQL_ROOT_PASSWORD: Password1!
+      MYSQL_DATABASE: commandsdb
     ports:
       - 3311:3306
