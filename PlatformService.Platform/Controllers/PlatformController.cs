@@ -50,6 +50,8 @@ public class PlatformController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PlatformReadDto>> CreatePlatformEndpoint(PlatformCreateDto platformCreateDto)
     {
         if (platformCreateDto is null)
