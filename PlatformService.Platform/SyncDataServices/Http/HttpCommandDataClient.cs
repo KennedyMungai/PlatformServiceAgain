@@ -5,12 +5,12 @@ using PlatformService.Platform.Models.Dtos;
 namespace PlatformService.Platform.SyncDataServices.Http;
 
 
-public class CommandDataClient : ICommandDataClient
+public class HttpCommandDataClient : ICommandDataClient
 {
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
 
-    public CommandDataClient(HttpClient httpClient, IConfiguration configuration)
+    public HttpCommandDataClient(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
         _configuration = configuration;
