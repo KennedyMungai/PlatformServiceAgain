@@ -1,3 +1,4 @@
+using Bogus;
 using Microsoft.EntityFrameworkCore;
 using PlatformService.Platform.Models;
 
@@ -12,4 +13,16 @@ public class PlatformDbContext : DbContext
     }
 
     public DbSet<PlatformModel> Platforms { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        var platforms = new Faker<PlatformModel>()
+                                .RuleFor(m => m.Name, f => f.Commerce.ProductName())
+                                .RuleFor(m => m.Publisher, f => f.Company.CompanyName())
+                                .RuleFor(m => m.Cost, f => f.Random.Int(1, 100));
+
+        modelBuilder
+            .Entity<PlatformModel>()
+            .HasData(platforms.Generate(100));
+    }
 }
