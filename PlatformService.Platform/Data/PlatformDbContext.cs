@@ -24,6 +24,6 @@ public class PlatformDbContext : DbContext
 
         modelBuilder
             .Entity<PlatformModel>()
-            .HasData(platforms.Generate(100));
+            .HasData(platforms.Generate(1000));
     }
 }
