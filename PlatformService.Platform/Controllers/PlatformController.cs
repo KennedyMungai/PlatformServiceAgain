@@ -71,6 +71,16 @@ public class PlatformController : ControllerBase
         await _platformService.CreatePlatform(platformModel);
         await _platformService.SaveChanges();
 
+        try
+        {
+            await _commandDataClient.SendPlatformToCommand(platformReadData);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+
         return await Task.FromResult(CreatedAtRoute("GetPlatformById", new { id = platformModel.Id }, platformReadData));
     }
 }
