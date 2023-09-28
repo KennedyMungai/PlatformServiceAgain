@@ -24,9 +24,9 @@ public class PlatformRepo : IPlatformRepo
         return await _context.Platforms.ToListAsync();
     }
 
-    public Task<PlatformModel> GetPlatformById(int id)
+    public async Task<PlatformModel> GetPlatformById(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Platforms.FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<bool> SaveChanges()
