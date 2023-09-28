@@ -13,16 +13,16 @@ public class PlatformController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly IPlatformRepo _platformService;
-    private readonly ICommandDataClient _command;
+    private readonly ICommandDataClient _commandDataClient;
 
     public PlatformController(
         IPlatformRepo platformService,
         IMapper mapper,
-        ICommandDataClient command)
+        ICommandDataClient commandDataClient)
     {
         _mapper = mapper;
         _platformService = platformService;
-        _command = command;
+        _commandDataClient = commandDataClient;
     }
 
     [HttpGet]
