@@ -33,7 +33,7 @@ public class PlatformRepo : IPlatformRepo
         return await _context.Platforms.ToListAsync();
     }
 
-    public async Task<PlatformModel> GetPlatformById(int id)
+    public async Task<PlatformModel> GetPlatformById(Guid id)
     {
         return await _context.Platforms.FirstOrDefaultAsync(p => p.Id == id);
     }
