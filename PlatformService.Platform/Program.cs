@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PlatformService.Platform.Data;
+using PlatformService.Platform.Repositories.PlatformRepos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<PlatformDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("PlatformDbConnString"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("PlatformDbConnString"))); ;
 });
+builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 
 var app = builder.Build();
 
