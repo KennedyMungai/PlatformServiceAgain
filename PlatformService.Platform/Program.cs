@@ -16,6 +16,7 @@ builder.Services.AddDbContext<PlatformDbContext>(options =>
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("PlatformDbConnString"))); ;
 });
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
