@@ -19,10 +19,32 @@ public class PlatformController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<PlatformReadDto>>> GetAllPlatformsEndpoint()
     {
         var platforms = _mapper.Map<IEnumerable<PlatformReadDto>>(await _platformService.GetAllPlatforms());
 
         return await Task.FromResult(Ok(platforms));
+    }
+
+    [HttpGet("{id}", Name = "GetPlatformById")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PlatformReadDto>> GetPlatformByIdEndpoint(int id)
+    {
+        if (id < 0)
+        {
+            return await Task.FromResult(BadRequest("Invalid Id"));
+        }
+
+        var requestedPlatform = _mapper.Map<PlatformReadDto>(await _platformService.GetPlatformById(id));
+
+        if (requestedPlatform is null)
+        {
+            return await Task.FromResult(NotFound("The requested platform does not exist"));
+        }
+
+        return await Task.FromResult(Ok(requestedPlatform));
     }
 }
