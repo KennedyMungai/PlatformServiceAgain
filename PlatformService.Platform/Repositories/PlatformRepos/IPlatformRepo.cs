@@ -5,8 +5,8 @@ namespace PlatformService.Platform.Repositories.PlatformRepos;
 
 public interface IPlatformRepo
 {
-    bool SaveChanges();
-    IEnumerable<PlatformModel> GetAllPlatforms();
-    PlatformModel GetPlatformById(int id);
-    void CreatePlatform(PlatformModel platform);
+    Task<bool> SaveChanges();
+    Task<IEnumerable<PlatformModel>> GetAllPlatforms();
+    Task<PlatformModel> GetPlatformById(int id);
+    Task CreatePlatform(PlatformModel platform);
 }
