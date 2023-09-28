@@ -34,5 +34,7 @@ public class HttpCommandDataClient : ICommandDataClient
         {
             Console.WriteLine("Sync POST to CommandService was NOT OK");
         }
+
+        Console.WriteLine("Message sent successfully");
     }
 }
