@@ -14,9 +14,18 @@ public class PlatformRepo : IPlatformRepo
         _context = context;
     }
 
-    public Task CreatePlatform(PlatformModel platform)
+    public async Task CreatePlatform(PlatformModel platform)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _context.Platforms.AddAsync(platform);
+            await SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
     }
 
     public async Task<IEnumerable<PlatformModel>> GetAllPlatforms()
