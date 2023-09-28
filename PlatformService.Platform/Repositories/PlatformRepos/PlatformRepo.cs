@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using PlatformService.Platform.Data;
 using PlatformService.Platform.Models;
 
@@ -18,9 +19,9 @@ public class PlatformRepo : IPlatformRepo
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<PlatformModel>> GetAllPlatforms()
+    public async Task<IEnumerable<PlatformModel>> GetAllPlatforms()
     {
-        throw new NotImplementedException();
+        return await _context.Platforms.ToListAsync();
     }
 
     public Task<PlatformModel> GetPlatformById(int id)
