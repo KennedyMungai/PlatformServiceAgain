@@ -61,6 +61,7 @@ public class PlatformController : ControllerBase
         var platformReadData = _mapper.Map<PlatformReadDto>(platformModel);
 
         await _platformService.CreatePlatform(platformModel);
+        await _platformService.SaveChanges();
 
         return await Task.FromResult(CreatedAtRoute("GetPlatformById", new { id = platformModel.Id }, platformReadData));
     }
