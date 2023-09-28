@@ -6,7 +6,7 @@ public class PlatformModel
 {
     [Key]
     [Required]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     [Required]
     public string Name { get; set; } = string.Empty;
     [Required]
