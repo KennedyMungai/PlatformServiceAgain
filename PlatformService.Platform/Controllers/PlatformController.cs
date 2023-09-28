@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PlatformService.Platform.Models;
 using PlatformService.Platform.Models.Dtos;
 using PlatformService.Platform.Repositories.PlatformRepos;
 
@@ -46,5 +47,21 @@ public class PlatformController : ControllerBase
         }
 
         return await Task.FromResult(Ok(requestedPlatform));
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<PlatformReadDto>> CreatePlatformEndpoint(PlatformCreateDto platformCreateDto)
+    {
+        if (platformCreateDto is null)
+        {
+            return await Task.FromResult(BadRequest("Invalid platform data"));
+        }
+
+        var platformModel = _mapper.Map<PlatformModel>(platformCreateDto);
+        var platformReadData = _mapper.Map<PlatformReadDto>(platformModel);
+
+        await _platformService.CreatePlatform(platformModel);
+
+        return await Task.FromResult(CreatedAtRoute("GetPlatformById", new { id = platformModel.Id }, platformReadData));
     }
 }
